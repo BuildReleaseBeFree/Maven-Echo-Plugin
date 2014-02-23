@@ -19,13 +19,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.soebes.maven.plugins.echo;
+package org.buildmonkey.maven.plugins.echo;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 /**
- * @author <a href="mailto:kama@soebes.de">Karl Heinz Marbaise</a>
+ * @author <a href="mailto:james@purplenoise.net">James Borkowski</a>
  */
 public abstract class AbstractEchoPlugIn extends AbstractMojo {
 
