@@ -65,13 +65,23 @@ public class EchoMojo extends AbstractEchoPlugIn {
   
 
   /**
+   * This will turn on or off the LARGE text heading that displays
+   * the text set with the 'default-text' property, or, if not set
+   * defaults to 'project.artifactId' 'project.version' and uses
+   * the jFiglet library to display it as ASCII Art.
+   * 
+   */
+  @Parameter(defaultValue="false", required=false)
+  private boolean headingEnable;
+	
+  /**
    * This will set the text to use for the heading,
    * the given message will be printed out as a heading using
    * the jFiglet library to display it as ASCII Art.
    * 
    */
   @Parameter(defaultValue="${project.artifactId} ${project.version}", required=false)
-  private String heading;
+  private String headingText;
 	
   /**
    * The messages you would like to print out.
@@ -96,7 +106,9 @@ public class EchoMojo extends AbstractEchoPlugIn {
      */
     public void execute () throws MojoExecutionException
     {
-        String asciiArt = FigletFont.convertOneLine( heading );
+      if ( headingEnable = true )
+      {
+        String asciiArt = FigletFont.convertOneLine( headingText );
         Scanner scanner = new Scanner( asciiArt );
         switch ( logLevel ) 
         {
@@ -137,25 +149,26 @@ public class EchoMojo extends AbstractEchoPlugIn {
                 scanner.close();
                 break;
         }
+      }
 
-        for ( String item : echos )
-        {
-            switch ( logLevel ) 
-            {
-                case DEBUG:
-                    getLog ( ).debug ( item );
-                    break;
-                case ERROR:
-                    getLog ( ).error ( item );
-                    break;
-                case INFO:
-                    getLog ( ).info ( item );
-                    break;
-                case WARNING:
-                    getLog ( ).warn ( item );
-                    break;
-            }
-        }
+      for ( String item : echos )
+      {
+          switch ( logLevel ) 
+          {
+              case DEBUG:
+                  getLog ( ).debug ( item );
+                  break;
+              case ERROR:
+                  getLog ( ).error ( item );
+                  break;
+              case INFO:
+                  getLog ( ).info ( item );
+                  break;
+              case WARNING:
+                  getLog ( ).warn ( item );
+                  break;
+          }
+       }
     }
 
 }

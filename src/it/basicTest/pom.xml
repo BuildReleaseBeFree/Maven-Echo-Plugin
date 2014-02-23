@@ -42,7 +42,8 @@
               <goal>echo</goal>
             </goals>
             <configuration>
-              <heading>Test Heading</heading>
+              <headingEnable>true</headingEnable>
+              <headingText>Test Heading 1</headingText>
               <echos>
                 <echo>This is line Nr. 1</echo>
                 <echo>This is line Nr. 2</echo>
@@ -58,7 +59,8 @@
             </goals>
             <configuration>
               <logLevel>WARNING</logLevel>
-              <heading>Test Heading</heading>
+              <headingEnable>true</headingEnable>
+              <headingText>Test Heading 2</headingText>
               <echos>
                 <echo>Warning: This is line Nr. 1</echo>
                 <echo>Warning: This is line Nr. 2</echo>
@@ -74,7 +76,7 @@
             </goals>
             <configuration>
               <logLevel>ERROR</logLevel>
-              <heading>Test Heading</heading>
+              <headingEnable>true</headingEnable>
               <echos>
                 <echo>ERROR: This is line Nr. 1</echo>
                 <echo>ERROR: This is line Nr. 2</echo>
@@ -90,7 +92,8 @@
             </goals>
             <configuration>
               <logLevel>DEBUG</logLevel>
-              <heading>Test Heading</heading>
+              <headingEnable>true</headingEnable>
+              <headingText>Test Heading 3</headingText>
               <echos>
                 <echo>DEBUG: This is line Nr. 1</echo>
                 <echo>DEBUG: This is line Nr. 2</echo>
@@ -106,7 +109,8 @@
             </goals>
             <configuration>
               <logLevel>INFO</logLevel>
-              <heading>Test Heading</heading>
+              <headingEnable>true</headingEnable>
+              <headingText>Test Heading 4</headingText>
               <echos>
                 <echo xml:space="preserve">      XXX YYY ZZ</echo>
               </echos>
