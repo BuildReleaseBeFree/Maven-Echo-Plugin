@@ -11,9 +11,9 @@
   <groupId>com.buildmonkey.maven.plugins</groupId>
   <artifactId>echo-banner-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>1.1</version>
+  <version>1.2</version>
   <name>Maven Echo and Banner Plugin</name>
-  <url>https://github.com/khmarbaise/Maven-Echo-Plugin</url>
+  <url>https://github.com/jamesbor/Maven-Echo-Plugin</url>
 
   <inceptionYear>2012</inceptionYear>
   <description>The Echo Maven Plugin is intended to printout 
@@ -21,7 +21,7 @@
 
   <issueManagement>
     <system>default</system>
-    <url>https://github.com/khmarbaise/Maven-Echo-Plugin/issues</url>
+    <url>https://github.com/jamesbor/Maven-Echo-Plugin/issues</url>
   </issueManagement>
 
   <ciManagement>

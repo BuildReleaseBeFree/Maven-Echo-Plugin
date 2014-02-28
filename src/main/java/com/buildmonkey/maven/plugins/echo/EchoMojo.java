@@ -176,6 +176,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
 	{
 		if ( headingEnable = true )
 		{
+			headingText = headingText.substring(0, 1).toUpperCase() + headingText.substring(1);
 			String asciiArt = FigletFont.convertOneLine( headingText );
 			Scanner scanner = new Scanner( asciiArt );
 			String headingTextToDo = "";
@@ -194,8 +195,6 @@ public class EchoMojo extends AbstractEchoPlugIn {
 			}
 			renderMavenOutputScanner(scanner);
 		}
-		
-
 
 		for ( String item : echos )
 		{
