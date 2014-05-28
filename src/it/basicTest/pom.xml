@@ -61,8 +61,12 @@
             <configuration>
               <logLevel>WARNING</logLevel>
               <textWidth>120</textWidth>
-              <headingEnable>true</headingEnable>
-              <headingText>Test Heading 2</headingText>
+            <headingEnable>true</headingEnable>
+            <headingText>Test Heading 2</headingText>
+            <headingFont>small</headingFont>
+            <subheadingEnable>true</subheadingEnable>
+            <subheadingText>Test Heading 2</subheadingText>
+            <subheadingFont>small</subheadingFont>
               <echos>
                 <echo>Warning: This is line Nr. 1</echo>
                 <echo>Warning: This is line Nr. 2</echo>
@@ -79,7 +83,12 @@
             <configuration>
               <logLevel>ERROR</logLevel>
               <textWidth>160</textWidth>
-              <headingEnable>true</headingEnable>
+                <headingEnable>true</headingEnable>
+                <headingText>Test Heading 2</headingText>
+                <headingFont>small</headingFont>
+                <subheadingEnable>true</subheadingEnable>
+                <subheadingText>Test Heading 2</subheadingText>
+                <subheadingFont>small</subheadingFont>
               <echos>
                 <echo>ERROR: This is line Nr. 1</echo>
                 <echo>ERROR: This is line Nr. 2</echo>
