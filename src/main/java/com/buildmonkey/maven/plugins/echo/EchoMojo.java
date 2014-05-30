@@ -314,10 +314,6 @@ public class EchoMojo extends AbstractEchoPlugIn {
         //run only at the execution root.
         if ( ( runOnlyAtExecutionRoot && !isThisTheExecutionRoot() ) || ! runOnlyAtExecutionRoot )
         {
-            getLog().info( "Skipping the assembly in this project because it's not the Execution Root" );
-        }
-        else
-        {
             getLog().info("As this appeared to be the Execution Root or we don't care, we are doing something useful");
             if ( headerEnable == true )
             {
@@ -388,6 +384,13 @@ public class EchoMojo extends AbstractEchoPlugIn {
                 renderMavenOutputScanner(scanner);
             }
         }
-	}
+        else
+        {
+            getLog().info( "Skipping the assembly in this project because it's not the Execution Root" );
+        }
+
+
+    }
+
 
 }
