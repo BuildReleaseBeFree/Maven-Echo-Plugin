@@ -42,6 +42,7 @@
               <goal>echo</goal>
             </goals>
             <configuration>
+              <runOnlyAtExecutionRoot />
               <textWidth>80</textWidth>
               <headingEnable>true</headingEnable>
               <headingText>Test Heading 123456789012345678901234567890</headingText>

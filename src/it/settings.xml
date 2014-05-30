@@ -1,9 +1,14 @@
 <!--
 
-    The Maven Echo Plugin
+    The BuildMonkey Maven Echo Banner Plugin
 
-    Copyright (c) 2012 by SoftwareEntwicklung Beratung Schulung (SoEBeS)
-    Copyright (c) 2012 by Karl Heinz Marbaise
+    - feat. the BuildMonkey Terminal Toolkit
+    - based on the jFiglet implementation of the classic Unix Figlet Ascii banner tool
+    - Derivative works of the Maven Echo Plugin, original copyright acknowledgement given to
+      SoftwareEntwicklung Beratung Schulung (SoEBeS) & Karl Heinz Marbaise 2012
+
+     Copyright (c) 2014 by BuildMonkey
+     Copyright (c) 2014 by James Borkowski
 
     Licensed to the Apache Software Foundation (ASF) under one or more
     contributor license agreements.  See the NOTICE file distributed with
