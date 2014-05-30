@@ -24,10 +24,13 @@ package com.buildmonkey.maven.plugins.echo;
 import java.io.File;
 import java.util.List;
 
+import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.LegacySupport;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 
@@ -44,38 +47,42 @@ public class EchoMojo extends AbstractEchoPlugIn {
     @Requirement
     private LegacySupport legacySupport;
 
+    @Parameter( defaultValue = "${project}", readonly = true )
+    private MavenProject project;
+
+    @Parameter( defaultValue = "${session}", readonly = true )
+    private MavenSession session;
+
     /**
      * Base directory of the project.
-     *
-     * @parameter default-value="${basedir}"
-     * @required
-     * @readonly
      */
+    @Parameter( defaultValue = "${project.basedir}", readonly = true )
     private File basedir;
 
     /**
      * This will cause the assembly to run only at the top of a given module tree. That is, run in the project
      * contained in the same folder where the mvn execution was launched.
-     * @parameter expression="${runOnlyAtExecutionRoot}" default-value="false"
-     * @since 2.2-beta-4
      */
     @Parameter(defaultValue="false", required=false)
     private boolean runOnlyAtExecutionRoot;
 
-    // boolean result = legacySupport.getSession().getExecutionRootDirectory().equalsIgnoreCase(basedir.toString());
-
+    /**
+     * Returns true if the current project is located at the Execution Root Directory (where mvn was launched)
+     * @return
+     */
     protected boolean isThisTheExecutionRoot()
     {
-        getLog().debug("Root Folder:" + legacySupport.getSession().getExecutionRootDirectory());
-        getLog().debug("Current Folder:" + basedir);
-        boolean result = legacySupport.getSession().getExecutionRootDirectory().equalsIgnoreCase(basedir.toString());
+        Log log = this.getLog();
+        log.debug("Root Folder:" + session.getExecutionRootDirectory());
+        log.debug("Current Folder:" + basedir);
+        boolean result = session.getExecutionRootDirectory().equalsIgnoreCase(basedir.toString());
         if (result)
         {
-            getLog().debug("This is the execution root.");
+            log.debug("This is the execution root.");
         }
         else
         {
-            getLog().debug("This is NOT the execution root.");
+            log.debug("This is NOT the execution root.");
         }
         return result;
     }
@@ -163,7 +170,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
 	 * </ul>
 	 * 
 	 */
-	@Parameter(defaultValue="INFO", required=true)
+	@Parameter( defaultValue="INFO", required=true )
 	private LogLevels logLevel;
 
 
@@ -174,7 +181,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
 	 * the jFiglet library to display it as ASCII Art.
 	 * 
 	 */
-	@Parameter(defaultValue="false", required=false)
+	@Parameter( defaultValue="false", required=false )
 	private boolean headerEnable;
 
     /**
@@ -184,7 +191,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="false", required=false)
+    @Parameter( defaultValue="false", required=false )
     private boolean headingEnable;
 
     /**
@@ -194,7 +201,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="false", required=false)
+    @Parameter( defaultValue="false", required=false )
     private boolean subheadingEnable;
 
     /**
@@ -204,7 +211,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="false", required=false)
+    @Parameter( defaultValue="false", required=false )
     private boolean footerEnable;
 
 	/**
@@ -212,7 +219,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
 	 * displayed be wrapped to the next line.
 	 * 
 	 */
-	@Parameter(defaultValue="120", required=false)
+	@Parameter( defaultValue="120", required=false )
 	private int textWidth;
 
     /**
@@ -221,7 +228,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="test", required=false)
+    @Parameter( defaultValue="test", required=false )
     private String headerText;
 
     /**
@@ -230,7 +237,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="${project.artifactId}", required=false)
+    @Parameter( defaultValue="${project.artifactId}", required=false )
     private String headingText;
 
     /**
@@ -239,7 +246,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="${project.version}", required=false)
+    @Parameter( defaultValue="${project.version}", required=false )
     private String subheadingText;
 
     /**
@@ -248,7 +255,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="test", required=false)
+    @Parameter( defaultValue="test", required=false )
     private String footerText;
 
 
@@ -258,7 +265,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="small", required=false)
+    @Parameter( defaultValue="small", required=false )
     private String headerFont;
 
     /**
@@ -267,7 +274,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="small", required=false)
+    @Parameter( defaultValue="small", required=false )
     private String headingFont;
 
     /**
@@ -276,7 +283,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="small", required=false)
+    @Parameter( defaultValue="small", required=false )
     private String subheadingFont;
 
     /**
@@ -285,7 +292,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
      * the jFiglet library to display it as ASCII Art.
      *
      */
-    @Parameter(defaultValue="small", required=false)
+    @Parameter( defaultValue="small", required=false )
     private String footerFont;
 
     /**
@@ -302,7 +309,7 @@ public class EchoMojo extends AbstractEchoPlugIn {
 	 *    ..
 	 * </pre>
 	 */
-	@Parameter(required = true)
+	@Parameter( required = true )
 	private List<String> echos;
 
 	/*
@@ -314,19 +321,17 @@ public class EchoMojo extends AbstractEchoPlugIn {
         //run only at the execution root.
         if ( ( runOnlyAtExecutionRoot && !isThisTheExecutionRoot() ) || ! runOnlyAtExecutionRoot )
         {
-            getLog().info("As this appeared to be the Execution Root or we don't care, we are doing something useful");
-            if ( headerEnable == true )
-            {
-                headerText = headerText.substring(0, 1).toUpperCase() + headerText.substring(1);
-                String asciiArt = FigletFont.getBannerAsFontMaxWidth(headerFont, textWidth, headerText);
+            getLog().info( "As this appeared to be the Execution Root or we don't care, we are doing something useful" );
+            if ( headerEnable == true ) {
+                headerText = headerText.substring( 0, 1 ).toUpperCase() + headerText.substring( 1 );
+                String asciiArt = FigletFont.getBannerAsFontMaxWidth( headerFont, textWidth, headerText );
                 Scanner scanner = new Scanner( asciiArt );
-                renderMavenOutputScanner(scanner);
+                renderMavenOutputScanner( scanner );
             }
 
-            if ( headingEnable == true )
-            {
-                headingText = headingText.substring(0, 1).toUpperCase() + headingText.substring(1);
-                String asciiArt = FigletFont.getBannerAsFontMaxWidth(headingFont, textWidth, headingText);
+            if ( headingEnable == true ) {
+                headingText = headingText.substring( 0, 1 ).toUpperCase() + headingText.substring( 1 );
+                String asciiArt = FigletFont.getBannerAsFontMaxWidth( headingFont, textWidth, headingText );
                 //String asciiArt = FigletFont.convertOneLine( headingText );
                 Scanner scanner = new Scanner( asciiArt );
 /*			String headingTextToDo = "";
@@ -345,51 +350,45 @@ public class EchoMojo extends AbstractEchoPlugIn {
 				//asciiArt = FigletFont.convertOneLine( headingText );
 				scanner = new Scanner( asciiArt );
 			}*/
-                renderMavenOutputScanner(scanner);
+                renderMavenOutputScanner( scanner );
             }
 
 
-            if ( subheadingEnable == true )
-            {
-                subheadingText = subheadingText.substring(0, 1).toUpperCase() + subheadingText.substring(1);
-                String asciiArt = FigletFont.getBannerAsFontMaxWidth(subheadingFont, textWidth, subheadingText);
+            if ( subheadingEnable == true ) {
+                subheadingText = subheadingText.substring( 0, 1 ).toUpperCase() + subheadingText.substring( 1 );
+                String asciiArt = FigletFont.getBannerAsFontMaxWidth( subheadingFont, textWidth, subheadingText );
                 Scanner scanner = new Scanner( asciiArt );
-                renderMavenOutputScanner(scanner);
+                renderMavenOutputScanner( scanner );
             }
 
-            for ( String item : echos )
-            {
-                switch ( logLevel )
-                {
+            for ( String item : echos ) {
+                switch ( logLevel ) {
                     case DEBUG:
-                        getLog ( ).debug ( item );
+                        getLog().debug(item);
                         break;
                     case ERROR:
-                        getLog ( ).error ( item );
+                        getLog().error(item);
                         break;
                     case INFO:
-                        getLog ( ).info ( item );
+                        getLog().info(item);
                         break;
                     case WARNING:
-                        getLog ( ).warn ( item );
+                        getLog().warn(item);
                         break;
                 }
             }
 
-            if ( footerEnable == true )
-            {
-                footerText = footerText.substring(0, 1).toUpperCase() + footerText.substring(1);
-                String asciiArt = FigletFont.getBannerAsFontMaxWidth(footerFont, textWidth, footerText);
+            if ( footerEnable == true ) {
+                footerText = footerText.substring( 0, 1 ).toUpperCase() + footerText.substring( 1 );
+                String asciiArt = FigletFont.getBannerAsFontMaxWidth( footerFont, textWidth, footerText );
                 Scanner scanner = new Scanner( asciiArt );
-                renderMavenOutputScanner(scanner);
+                renderMavenOutputScanner( scanner );
             }
+
         }
-        else
-        {
+        else {
             getLog().info( "Skipping the assembly in this project because it's not the Execution Root" );
         }
-
-
     }
 
 
